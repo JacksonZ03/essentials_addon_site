@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Blender Essentials Addon</title>
+        <style>
+            :root {
+                --bg-primary: #0f172a;
+                --bg-secondary: #1e293b;
+                --text-primary: #e2e8f0;
+                --text-secondary: #94a3b8;
+                --accent: #3b82f6;
+                --accent-hover: #2563eb;
+                --border: #334155;
+            }
+
+            body {
+                font-family: system-ui, -apple-system, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 0;
+                background-color: var(--bg-primary);
+                color: var(--text-primary);
+            }
+
+            h2 {
+                color: var(--text-primary);
+                margin-top: 0;
+                font-size: 1.8rem;
+                margin-bottom: 24px;
+            }
+
+            .hero {
+                background: linear-gradient(45deg, #1e293b, #0f172a);
+                padding: 80px 20px;
+                text-align: center;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+                margin: 0;
+                background: linear-gradient(to right, #60a5fa, #3b82f6);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                margin-bottom: 20px;
+            }
+
+            .hero p {
+                font-size: 1.25rem;
+                color: var(--text-secondary);
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .container {
+                max-width: 1000px;
+                margin: 0 auto;
+                padding: 40px 20px;
+            }
+
+            .install {
+                background: var(--bg-secondary);
+                border-radius: 16px;
+                border: 1px solid var(--border);
+                margin: 40px 0;
+            }
+
+            .install-content {
+                display: grid;
+                align-items: center;
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+                padding: 3rem;
+            }
+
+            .button {
+                display: flex;
+                height: auto;
+                padding: 16px 32px;
+                font-size: larger;
+                margin: auto;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                background-color: var(--accent);
+                color: white;
+                text-decoration: none;
+                border-radius: 8px;
+                font-weight: 500;
+            }
+
+            .button:hover {
+                background-color: var(--accent-hover);
+                transform: translateY(-2px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+
+            .button:active {
+                transform: translateY(2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            .feature {
+                display: grid;
+                align-items: center;
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+                padding: 3rem;
+                background: var(--bg-secondary);
+                margin-bottom: 40px;
+                border-radius: 16px;
+                border: 1px solid var(--border);
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+
+            .feature img {
+                width: 100%;
+                border-radius: 8px;
+                margin: 20px 0;
+                border: 1px solid var(--border);
+            }
+
+            .coming-soon {
+                text-align: center;
+                background: var(--bg-secondary);
+                border-radius: 16px;
+                border: 1px solid var(--border);
+                padding: 2rem;
+                margin: 0;
+            }
+
+            .coming-soon span {
+                font-size: 1.5rem;
+                background: linear-gradient(to right, #60a5fa, #3b82f6);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+
+            .divider {
+                height: 1px;
+                background: var(--border);
+                margin: 4rem auto;
+                width: 50%;
+                opacity: 0.5;
+            }
+
+            .preferences {
+                display: grid;
+                align-items: center;
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+                padding: 3rem;
+                background: var(--bg-secondary);
+                margin-bottom: 40px;
+                border-radius: 16px;
+                border: 1px solid var(--border);
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+
+            .preferences img {
+                width: 100%;
+                border-radius: 8px;
+                margin: 20px 0;
+                border: 1px solid var(--border);
+            }
+
+            ul,
+            ol {
+                color: var(--text-secondary);
+                padding-left: 20px;
+                margin: 0;
+                margin-top: 1.5rem;
+            }
+
+            li {
+                margin-bottom: 8px;
+            }
+
+            li:last-child {
+                margin-bottom: 0;
+            }
+
+            footer {
+                text-align: center;
+                padding: 40px 0;
+                color: var(--text-secondary);
+                border-top: 1px solid var(--border);
+            }
+
+            footer a {
+                color: var(--accent);
+                text-decoration: none;
+            }
+
+            footer a:hover {
+                text-decoration: underline;
+            }
+
+            @media (max-width: 768px) {
+                .install-content {
+                    grid-template-columns: 1fr;
+
+                    h2 {
+                        text-align: center;
+                    }
+                }
+                .feature {
+                    grid-template-columns: 1fr;
+                }
+                .feature h2 {
+                    text-align: center;
+                }
+                .divider {
+                    margin: 3.5rem auto;
+                }
+                .preferences {
+                    grid-template-columns: 1fr;
+                }
+                .preferences {
+                    display: flex;
+                    flex-direction: column-reverse;
+                }
+                .preferences h2 {
+                    text-align: center;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="hero">
+            <h1>Essentials Addon</h1>
+            <p>A collection of quality-of-life features missing in vanilla Blender</p>
+        </div>
+
+        <div class="container">
+            <div class="install">
+                <div class="install-content">
+                    <a href="https://blendermarket.com" class="button">Download It Now</a>
+                    <div class="install-text">
+                        <h2>Quick Install in 3-Steps</h2>
+                        <ol>
+                            <li>Purchase and download addon from Blender Market.</li>
+                            <li>Drag and drop the ZIP file anywhere inside Blender's UI.</li>
+                            <li>Click "OK" to install.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-text">
+                    <h2>Gravity Snap</h2>
+                    <p>
+                        Instantly snap any mesh or empty object to the surface of another mesh object - just as if you
+                        dropped it.
+                    </p>
+                    <p>Great for quickly aligning stuff in your scene.</p>
+                    <ul>
+                        <li>Works with any mesh or empty object</li>
+                        <li>Respects object rotation</li>
+                        <li>Maintains object scale</li>
+                    </ul>
+                </div>
+                <img src="images/gravity-snap.png" alt="Gravity Snap demonstration" />
+            </div>
+
+            <div class="feature">
+                <div class="feature-text">
+                    <h2>Center Camera Perspective</h2>
+                    <p>Quickly center the camera perspective view with a single click.</p>
+                    <p>There's actually no available way to do this in vanilla Blender.</p>
+                    <ul>
+                        <li>Single-click camera centering</li>
+                        <li>Works in perspective view</li>
+                        <li>Maintains camera settings</li>
+                    </ul>
+                </div>
+                <img src="images/center-camera.png" alt="Center Camera demonstration" />
+            </div>
+
+            <div class="feature">
+                <div class="feature-text">
+                    <h2>Spacebar Play/Pause Toggle</h2>
+                    <p>Prevent accidental timeline playback when using spacebar for other applications.</p>
+                    <p>
+                        Perfect for following YouTube tutorials or multitasking without accidentally playing your
+                        animation.
+                    </p>
+                    <ul>
+                        <li>Toggle spacebar animation playback</li>
+                        <li>Status indicator in the interface</li>
+                        <li>Easily reversible</li>
+                    </ul>
+                </div>
+                <img src="images/timeline-toggle.png" alt="Timeline Toggle demonstration" />
+            </div>
+
+            <div class="coming-soon">
+                <span>More features coming soon!</span>
+            </div>
+            <div class="divider"></div>
+
+            <div class="preferences">
+                <img src="images/configuration.png" alt="Configuration demonstration" />
+                <div class="feature-text">
+                    <h2>Don't need all the features?</h2>
+                    <p>Enable or disable them in the addon preferences.</p>
+                    <p>Out of sight, outta mind!</p>
+                    <p>Change preferences through:</p>
+                    <ol>
+                        <li>Edit > Preferences > Add-ons</li>
+                        <li>Find "Essentials" in the add-ons list</li>
+                        <li>Expand the addon preferences</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Addon created by <a href="https://youtube.com/@jackson_zheng">Jackson Zheng</a></p>
+        </footer>
+    </body>
+</html>
