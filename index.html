@@ -1,324 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Blender Essentials Addon</title>
-        <style>
-            :root {
-                --bg-primary: #0f172a;
-                --bg-secondary: #1e293b;
-                --text-primary: #e2e8f0;
-                --text-secondary: #94a3b8;
-                --accent: #3b82f6;
-                --accent-hover: #2563eb;
-                --border: #334155;
-            }
-
-            body {
-                font-family: system-ui, -apple-system, sans-serif;
-                line-height: 1.6;
-                margin: 0;
-                padding: 0;
-                background-color: var(--bg-primary);
-                color: var(--text-primary);
-            }
-
-            h2 {
-                color: var(--text-primary);
-                margin-top: 0;
-                font-size: 1.8rem;
-                margin-bottom: 24px;
-            }
-
-            .hero {
-                background: linear-gradient(45deg, #1e293b, #0f172a);
+    <div
+        style="
+            font-family: 'SF Pro Display', 'SF Pro Icons', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #e2e8f0;
+            background: #040712;
+        "
+    >
+        <div
+            style="
+                background: linear-gradient(45deg, #0f172a, #040712);
                 padding: 80px 20px;
                 text-align: center;
-                border-bottom: 1px solid var(--border);
-            }
-
-            .hero h1 {
-                font-size: 3.5rem;
-                margin: 0;
-                background: linear-gradient(to right, #60a5fa, #3b82f6);
-                -webkit-background-clip: text;
-                background-clip: text;
-                color: transparent;
-                margin-bottom: 20px;
-            }
-
-            .hero p {
-                font-size: 1.25rem;
-                color: var(--text-secondary);
-                max-width: 600px;
-                margin: 0 auto;
-            }
-
-            .container {
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 40px 20px;
-            }
-
-            .install {
-                background: var(--bg-secondary);
-                border-radius: 16px;
-                border: 1px solid var(--border);
-                margin: 40px 0;
-            }
-
-            .install-content {
-                display: grid;
-                align-items: center;
-                grid-template-columns: 1fr 1fr;
-                gap: 3rem;
-                padding: 3rem;
-            }
-
-            .button {
-                display: flex;
-                height: auto;
-                padding: 16px 32px;
-                font-size: larger;
-                margin: auto;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                background-color: var(--accent);
-                color: white;
-                text-decoration: none;
-                border-radius: 8px;
-                font-weight: 500;
-            }
-
-            .button:hover {
-                background-color: var(--accent-hover);
-                transform: translateY(-2px);
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            }
-
-            .button:active {
-                transform: translateY(2px);
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            }
-
-            .feature {
-                display: grid;
-                align-items: center;
-                grid-template-columns: 1fr 1fr;
-                gap: 3rem;
-                padding: 3rem;
-                background: var(--bg-secondary);
-                margin-bottom: 40px;
-                border-radius: 16px;
-                border: 1px solid var(--border);
-                transition: transform 0.2s, box-shadow 0.2s;
-            }
-
-            .feature img {
-                width: 100%;
-                border-radius: 8px;
-                margin: 20px 0;
-                border: 1px solid var(--border);
-            }
-
-            .coming-soon {
-                text-align: center;
-                background: var(--bg-secondary);
-                border-radius: 16px;
-                border: 1px solid var(--border);
-                padding: 2rem;
-                margin: 0;
-            }
-
-            .coming-soon span {
-                font-size: 1.5rem;
-                background: linear-gradient(to right, #60a5fa, #3b82f6);
-                -webkit-background-clip: text;
-                background-clip: text;
-                color: transparent;
-            }
-
-            .divider {
-                height: 1px;
-                background: var(--border);
-                margin: 4rem auto;
-                width: 50%;
-                opacity: 0.5;
-            }
-
-            .preferences {
-                display: grid;
-                align-items: center;
-                grid-template-columns: 1fr 1fr;
-                gap: 3rem;
-                padding: 3rem;
-                background: var(--bg-secondary);
-                margin-bottom: 40px;
-                border-radius: 16px;
-                border: 1px solid var(--border);
-                transition: transform 0.2s, box-shadow 0.2s;
-            }
-
-            .preferences img {
-                width: 100%;
-                border-radius: 8px;
-                margin: 20px 0;
-                border: 1px solid var(--border);
-            }
-
-            ul,
-            ol {
-                color: var(--text-secondary);
-                padding-left: 20px;
-                margin: 0;
-                margin-top: 1.5rem;
-            }
-
-            li {
-                margin-bottom: 8px;
-            }
-
-            li:last-child {
-                margin-bottom: 0;
-            }
-
-            footer {
-                text-align: center;
-                padding: 40px 0;
-                color: var(--text-secondary);
-                border-top: 1px solid var(--border);
-            }
-
-            footer a {
-                color: var(--accent);
-                text-decoration: none;
-            }
-
-            footer a:hover {
-                text-decoration: underline;
-            }
-
-            @media (max-width: 768px) {
-                .install-content {
-                    grid-template-columns: 1fr;
-
-                    h2 {
-                        text-align: center;
-                    }
-                }
-                .feature {
-                    grid-template-columns: 1fr;
-                }
-                .feature h2 {
-                    text-align: center;
-                }
-                .divider {
-                    margin: 3.5rem auto;
-                }
-                .preferences {
-                    grid-template-columns: 1fr;
-                }
-                .preferences {
-                    display: flex;
-                    flex-direction: column-reverse;
-                }
-                .preferences h2 {
-                    text-align: center;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="hero">
-            <h1>Essentials Addon</h1>
-            <p>A collection of quality-of-life features missing in vanilla Blender</p>
+                border-bottom: 1px solid #334155;
+            "
+        >
+            <h1 style="font-size: 3rem; font-weight: 600; color: #81b0fb; max-width: 600px; margin: 0 auto">
+                A Set of Essential Features Missing in Vanilla Blender
+            </h1>
         </div>
-
-        <div class="container">
-            <div class="install">
-                <div class="install-content">
-                    <a href="https://blendermarket.com" class="button">Download It Now</a>
-                    <div class="install-text">
-                        <h2>Quick Install in 3-Steps</h2>
-                        <ol>
-                            <li>Purchase and download addon from Blender Market.</li>
-                            <li>Drag and drop the ZIP file anywhere inside Blender's UI.</li>
-                            <li>Click "OK" to install.</li>
+        <div style="max-width: 1200px; margin: 0 auto; padding: 40px 20px">
+            <div
+                style="
+                    display: grid;
+                    padding: 3rem;
+                    background: #0f172a;
+                    margin-bottom: 40px;
+                    border-radius: 16px;
+                    border: 1px solid #334155;
+                "
+            >
+                <div style="display: flex; flex-direction: column; align-items: center">
+                    <h2 style="font-size: 2.2rem; font-weight: 600; color: #e2e8f0; margin: 0 0 24px 0">
+                        Gravity Snap
+                    </h2>
+                    <img
+                        src="https://assets.superhivemarket.com/cache/d478f9c789cc377df94f4fcf4d5b5bb8.gif"
+                        style="width: 100%; border-radius: 8px; margin: 20px 0; border: 1px solid #334155"
+                    />
+                    <div>
+                        <p style="font-size: 1.2rem; color: #e2e8f0; margin: 1rem 0">
+                            Perfectly snap any mesh or empty object to the surface of another mesh object instantly -
+                            just as if you dropped it.
+                        </p>
+                        <p style="font-size: 1.2rem; color: #e2e8f0; margin: 1rem 0">
+                            Great for quickly aligning meshes in your scene.
+                        </p>
+                        <ul style="font-size: 1.2rem; color: #94a3b8; padding-left: 20px; margin: 1.5rem 0">
+                            <li style="margin-bottom: 8px">Respects object size, shape and orientation</li>
+                            <li style="margin-bottom: 8px">Origin point moves with the object</li>
+                            <li style="margin-bottom: 0">
+                                Custom offset adjustment allow you to embed an object just above or below of target
+                                surface
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div
+                style="
+                    display: grid;
+                    padding: 3rem;
+                    background: #0f172a;
+                    margin-bottom: 40px;
+                    border-radius: 16px;
+                    border: 1px solid #334155;
+                "
+            >
+                <div style="display: flex; flex-direction: column; align-items: center">
+                    <h2 style="font-size: 2.2rem; font-weight: 600; color: #e2e8f0; margin: 0 0 24px 0">
+                        Auto-Highlight Selection in Outliner
+                    </h2>
+                    <img
+                        src="https://assets.superhivemarket.com/cache/3a92110a27a26674d7ee90aba3b88590.gif"
+                        style="width: 100%; border-radius: 8px; margin: 20px 0; border: 1px solid #334155"
+                    />
+                    <div>
+                        <p style="font-size: 1.2rem; color: #e2e8f0; margin: 1rem 0">
+                            While Blender does have a button to expand collections in Outliner to show the selected
+                            object, it requires an extra button press each time.
+                        </p>
+                        <p style="font-size: 1.2rem; color: #e2e8f0; margin: 1rem 0">
+                            With this addon, the process is automated, saving you both time and effort when navigating a
+                            large scene with many objects.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div
+                style="
+                    display: grid;
+                    padding: 3rem;
+                    background: #0f172a;
+                    margin-bottom: 40px;
+                    border-radius: 16px;
+                    border: 1px solid #334155;
+                "
+            >
+                <div style="display: flex; flex-direction: column; align-items: center">
+                    <h2 style="font-size: 2.2rem; font-weight: 600; color: #e2e8f0; margin: 0 0 24px 0">
+                        Center Camera Perspective
+                    </h2>
+                    <img
+                        src="https://assets.superhivemarket.com/cache/3ccf57261b0b276667108d379856d299.gif"
+                        style="width: 100%; border-radius: 8px; margin: 20px 0; border: 1px solid #334155"
+                    />
+                    <div>
+                        <p style="font-size: 1.2rem; color: #e2e8f0; margin: 1rem 0">
+                            Quickly center the camera perspective view with a single click.
+                        </p>
+                        <ul style="font-size: 1.2rem; color: #94a3b8; padding-left: 20px; margin: 1.5rem 0">
+                            <li style="margin-bottom: 8px">Vanilla Blender does not provide this feature at all</li>
+                            <li style="margin-bottom: 0">
+                                Closest thing in vanilla Blender is pressing Home, but that zooms camera to fullscreen
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div
+                style="
+                    display: grid;
+                    padding: 3rem;
+                    background: #0f172a;
+                    margin-bottom: 40px;
+                    border-radius: 16px;
+                    border: 1px solid #334155;
+                "
+            >
+                <div style="display: flex; flex-direction: column; align-items: center">
+                    <h2 style="font-size: 2.2rem; font-weight: 600; color: #e2e8f0; margin: 0 0 24px 0">
+                        Spacebar Play/Pause Toggle
+                    </h2>
+                    <img
+                        src="https://assets.superhivemarket.com/cache/5466c6f5d99df601cbfc26c0352dafde.gif"
+                        style="width: 100%; border-radius: 8px; margin: 20px 0; border: 1px solid #334155"
+                    />
+                    <div>
+                        <p style="font-size: 1.2rem; color: #e2e8f0; margin: 1rem 0">
+                            Prevent accidental timeline playback when using spacebar for other applications.
+                        </p>
+                        <p style="font-size: 1.2rem; color: #e2e8f0; margin: 1rem 0">
+                            Now you can play/pause YouTube tutorials with multiple screens open, without accidentally
+                            playing your animation.
+                        </p>
+                        <ul style="font-size: 1.2rem; color: #94a3b8; padding-left: 20px; margin: 1.5rem 0">
+                            <li style="margin-bottom: 8px">
+                                Works in all animation workspaces (timeline, graph editor, etc)
+                            </li>
+                            <li style="margin-bottom: 0">
+                                If keymap is not bound to spacebar, the button doesn't show in the UI
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div
+                style="
+                    display: grid;
+                    padding: 3rem;
+                    background: #0f172a;
+                    margin-bottom: 40px;
+                    border-radius: 16px;
+                    border: 1px solid #334155;
+                "
+            >
+                <div style="display: flex; flex-direction: column; align-items: center">
+                    <h2 style="font-size: 2.6rem; font-weight: 600; color: #e2e8f0">NEW UPDATE v1.1.0:</h2>
+                    <h2 style="font-size: 2.2rem; font-weight: 600; color: #e2e8f0; margin: 0 0 24px 0">
+                        Viewport/Render Visibility Sync
+                    </h2>
+                    <img
+                        src="https://assets.superhivemarket.com/cache/ff4a5136503a3da158369b9871597d26.gif"
+                        style="width: 100%; border-radius: 8px; margin: 20px 0; border: 1px solid #334155"
+                    />
+                    <div>
+                        <p style="font-size: 1.2rem; color: #e2e8f0; margin: 1rem 0">
+                            Sync the viewport and render visibility with a single click.
+                        </p>
+                        <p style="font-size: 1.2rem; color: #e2e8f0; margin: 1rem 0">
+                            MASSIVE timesaver when working on large scenes as manually searching and toggling visibility
+                            of each object often eats away hours of accumulated time.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <hr style="width: 60%; border: 1px solid #334155; margin: 40px auto" />
+            <div
+                style="
+                    display: grid;
+                    padding: 3rem;
+                    background: #0f172a;
+                    margin-bottom: 40px;
+                    border-radius: 16px;
+                    border: 1px solid #334155;
+                "
+            >
+                <div style="display: flex; flex-direction: column; align-items: center">
+                    <h2 style="font-size: 2.2rem; font-weight: 600; color: #e2e8f0; margin: 0 0 24px 0">
+                        Don't need all the features?
+                    </h2>
+                    <img
+                        src="https://assets.superhivemarket.com/cache/c9b64c43ae7bae4181b85213132c5048.png"
+                        style="
+                            width: 100%;
+                            max-width: 650px;
+                            border-radius: 8px;
+                            margin: 20px 0;
+                            border: 1px solid #334155;
+                        "
+                    />
+                    <div>
+                        <p style="font-size: 1.2rem; color: #e2e8f0; margin: 1rem 0">
+                            Enable or disable them in the addon preferences. This removes all buttons and toggles
+                            related to that feature from the UI.
+                        </p>
+                        <p style="font-size: 1.2rem; color: #94a3b8; margin: 1rem 0">Change preferences through:</p>
+                        <ol style="font-size: 1.2rem; color: #94a3b8; padding-left: 20px; margin: 1.5rem 0">
+                            <li style="margin-bottom: 8px">Edit &gt; Preferences &gt; Add-ons</li>
+                            <li style="margin-bottom: 8px">Find "Essentials" in the add-ons list</li>
+                            <li style="margin-bottom: 0">Expand the addon preferences</li>
                         </ol>
                     </div>
                 </div>
             </div>
-
-            <div class="feature">
-                <div class="feature-text">
-                    <h2>Gravity Snap</h2>
-                    <p>
-                        Perfectly snap any mesh or empty object to the surface of another mesh object instantly - just as if you
-                        dropped it.
-                    </p>
-                    <p>Great for quickly aligning meshes in your scene.</p>
-                    <ul>
-                        <li>Respects object size, shape and orientation</li>
-                        <li>Origin point moves with the object</li>
-                        <li>Custom offset adjustment allows you to embed object just inside or outside of target surface</li>
-                    </ul>
-                </div>
-                <img src="images/gravity-snap.gif" alt="Gravity Snap demonstration" />
-            </div>
-
-            <div class="feature">
-                <div class="feature-text">
-                    <h2>Center Camera Perspective</h2>
-                    <p>Quickly center the camera perspective view with a single click.</p>
-                    <ul>
-                        <li>Vanilla Blender does not provide this feature at all.</li>
-                        <li>Closest thing in vanilla Blender is pressing Home, but that zooms camera to fullscreen</li>
-                    </ul>
-                </div>
-                <img src="images/center-camera-perspective.gif" alt="Center Camera demonstration" />
-            </div>
-
-            <div class="feature">
-                <div class="feature-text">
-                    <h2>Spacebar Play/Pause Toggle</h2>
-                    <p>Prevent accidental timeline playback when using spacebar for other applications.</p>
-                    <p>
-                        Now you can pause and play YouTube tutorials without accidentally playing your
-                        animation.
-                    </p>
-                    <ul>
-                        <li>Works in all animation workspaces (timeline, graph editor, etc) </li>
-                        <li>If keymap is not bound to spacebar, the button doesn't show</li>
-                    </ul>
-                </div>
-                <img src="images/timeline-toggle.gif" alt="Timeline Toggle demonstration" />
-            </div>
-
-            <div class="coming-soon">
-                <span>More features coming soon!</span>
-            </div>
-            <div class="divider"></div>
-
-            <div class="preferences">
-                <img src="images/preferences.png" alt="Preferences demonstration" />
-                <div class="feature-text">
-                    <h2>Don't need all the features?</h2>
-                    <p>Enable or disable them in the addon preferences.</p>
-                    <p>Out of sight, outta mind!</p>
-                    <p>Change preferences through:</p>
-                    <ol>
-                        <li>Edit > Preferences > Add-ons</li>
-                        <li>Find "Essentials" in the add-ons list</li>
-                        <li>Expand the addon preferences</li>
-                    </ol>
-                </div>
-            </div>
         </div>
-
-        <footer>
-            <p>Addon created by <a href="https://youtube.com/@jackson_zheng">Jackson Zheng</a></p>
-        </footer>
-    </body>
+        <div style="text-align: center; padding: 40px 0; color: #e2e8f0; border-top: 1px solid #334155">
+            <h3 style="font-size: 1.5rem; font-weight: 600; margin: 0">More features coming in the future!</h3>
+        </div>
+    </div>
 </html>
