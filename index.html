@@ -230,4 +230,14 @@
             <h3 style="font-size: 1.5rem; font-weight: 600; margin: 0">More features coming in the future!</h3>
         </div>
     </div>
+    <script>
+      function sendHeight() {
+        const h = document.documentElement.scrollHeight;
+        parent.postMessage({ type: "embedHeight", height: h }, "*");
+      }
+    
+      window.addEventListener("load", sendHeight);
+      window.addEventListener("resize", sendHeight);
+      new ResizeObserver(sendHeight).observe(document.documentElement);
+    </script>
 </html>
